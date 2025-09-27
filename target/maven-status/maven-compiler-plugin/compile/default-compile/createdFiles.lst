@@ -7,7 +7,6 @@ ifba\client\Client.class
 ifba\common\HeartbeatMonitor.class
 ifba\common\LamportClock.class
 ifba\worker\Worker.class
-ifba\worker\WorkerNode.class
 ifba\worker\Worker$1.class
 ifba\Main.class
 ifba\orchestrator\MainOrchestrator.class

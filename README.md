@@ -71,8 +71,7 @@ estado, tolerância a falhas, replicação, comunicação entre processos e aute
                 │   └── StateReplicator.java         # Sincronização de estado entre orquestradores
                 │
                 └── worker/
-                    ├── Worker.java                  # Lógica de execução de tarefas
-                    └── WorkerNode.java              # Comunicação e heartbeat com o orquestrador
+                    └── Worker.java                  # Lógica de execução de tarefas
 
 ```
 
