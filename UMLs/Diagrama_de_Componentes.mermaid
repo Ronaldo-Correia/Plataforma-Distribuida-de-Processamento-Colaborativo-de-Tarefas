@@ -1,0 +1,15 @@
+graph TD
+    Cliente --> SocketTCP
+    SocketTCP --> AuthManager
+    AuthManager --> LoadBalancer
+    LoadBalancer --> Worker
+    Worker --> ExecucaoTarefas
+    Worker --> HeartbeatSender
+    Worker --> StatusReporter
+    HeartbeatMonitor --> StateReplicator
+    StateReplicator --> BackupOrchestrator
+    BackupOrchestrator --> MulticastSync
+
+    %% Agrupamento visual (opcional)
+    classDef grupo fill:,stroke:#333,stroke-width:1px;
+    class Cliente,SocketTCP,AuthManager,LoadBalancer,Worker,ExecucaoTarefas,HeartbeatSender,StatusReporter,HeartbeatMonitor,StateReplicator,BackupOrchestrator,MulticastSync grupo;

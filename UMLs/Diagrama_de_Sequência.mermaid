@@ -1,0 +1,20 @@
+sequenceDiagram
+participant Cliente
+participant OrquestradorPrincipal
+participant Worker1
+participant OrquestradorBackup
+
+Cliente->>OrquestradorPrincipal: Envia tarefa + credenciais
+OrquestradorPrincipal->>Cliente: Autenticação OK
+OrquestradorPrincipal->>Worker1: Envia tarefa
+Worker1->>OrquestradorPrincipal: Status: RUNNING
+Worker1->>OrquestradorPrincipal: Status: COMPLETED
+OrquestradorPrincipal->>OrquestradorBackup: Replicação de estado
+
+Note over Worker1: Falha simulada (heartbeat interrompido)
+OrquestradorPrincipal->>OrquestradorPrincipal: Detecta falha
+OrquestradorPrincipal->>Worker2: Redistribui tarefa
+
+Note over OrquestradorPrincipal: Principal cai
+OrquestradorBackup->>OrquestradorBackup: Detecta ausência de heartbeat
+OrquestradorBackup->>Cliente: Assume papel de coordenador
