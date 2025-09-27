@@ -90,7 +90,7 @@ git clone https://github.com/Ronaldo-Correia/Plataforma-Distribuida-de-Processam
 ```
 2. 📁Navegue até o diretório do projeto:
 ```bash
-cd "C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas"
+cd "C:\Users\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas"
 ```
 
 3. ⚙️ Compile o projeto:
@@ -105,7 +105,7 @@ mvn package
 ---
 
 ## 🧪 5. Testando a Plataforma Distribuída
-✅ Abrir múltiplos terminais no Windows
+Abrir múltiplos terminais no Windows
 Você pode usar:
 Windows Terminal (melhor opção: várias abas)
 CMD ou PowerShell
