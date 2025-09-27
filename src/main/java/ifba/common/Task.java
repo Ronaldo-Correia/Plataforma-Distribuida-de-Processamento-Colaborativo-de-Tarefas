@@ -6,6 +6,9 @@ public class Task {
     private String assignedWorker;
     private int timestamp;
 
+    public Task() {
+    }
+
     public Task(String id, String payload) {
         this.id = id;
         this.payload = payload;
@@ -19,4 +22,18 @@ public class Task {
 
     public int getTimestamp() { return timestamp; }
     public void setTimestamp(int timestamp) { this.timestamp = timestamp; }
+
+    public enum Status {
+        PENDING, RUNNING, COMPLETED, FAILED
+    }
+
+    private Status status = Status.PENDING;
+
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
+
+    @Override
+    public String toString() {
+        return "Task{id='" + id + "', worker='" + assignedWorker + "', status=" + status + ", timestamp=" + timestamp + "}";
+    }
 }

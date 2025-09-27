@@ -28,4 +28,8 @@ public class HeartbeatMonitor {
             }
         }
     }
+    public void removeWorker(String workerId) {
+    lastSeen.remove(workerId);
+}
+
 }

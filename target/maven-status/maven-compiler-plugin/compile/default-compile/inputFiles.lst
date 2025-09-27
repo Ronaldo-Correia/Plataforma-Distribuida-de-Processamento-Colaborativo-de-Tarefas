@@ -1,3 +1,5 @@
+C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\BackupMain.java
+C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\client\Client.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\common\HeartbeatMonitor.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\common\LamportClock.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\common\Task.java
@@ -5,9 +7,10 @@ C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\Main.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\network\AuthManager.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\network\MulticastSync.java
-C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\network\TcpServer.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\orchestrator\BackupOrchestrator.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\orchestrator\LoadBalancer.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\orchestrator\MainOrchestrator.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\orchestrator\StateReplicator.java
+C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\worker\Worker.java
 C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\worker\WorkerNode.java
+C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas\src\main\java\ifba\WorkerMain.java

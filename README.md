@@ -107,3 +107,37 @@ Ou se quiser de maneira mais rápida,no Windows execute os 3 comandos em um úni
 ```
 5. 🧪 Testando:
 
+✅ Abrir múltiplos terminais no Windows
+Você pode usar:
+
+Windows Terminal (melhor opção: várias abas)
+
+CMD ou PowerShell
+
+Ou abrir múltiplas janelas do terminal manualmente
+
+Em cada terminal, navegue até a pasta do projeto:
+
+bash
+cd "C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas"
+✅ Executar os 6 componentes
+🖥️ Terminal 1 — Orquestrador Principal
+bash
+java -jar target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar
+Isso executa a classe ifba.Main, que você definiu como mainClass no pom.xml.
+
+🖥️ Terminal 2 — Orquestrador Backup
+bash
+java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.BackupMain
+🖥️ Terminal 3 — Worker 1
+bash
+java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.WorkerMain worker1 6001
+🖥️ Terminal 4 — Worker 2
+bash
+java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.WorkerMain worker2 6002
+🖥️ Terminal 5 — Worker 3
+bash
+java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.WorkerMain worker3 6003
+🖥️ Terminal 6 — Cliente
+bash
+java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.
