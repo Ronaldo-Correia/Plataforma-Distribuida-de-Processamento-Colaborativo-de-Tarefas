@@ -142,13 +142,7 @@ java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar
 java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.client.Client
 ```
 ---
-## 6. 📊 Diagramas UML
-
-- [Diagrama de Casos de Uso](UMLs/Diagrama_de_Casos_de_Uso.mermaid)
-- [Diagrama de Sequência](UMLs/Diagrama_de_Sequência.mermaid)
-- [Diagrama de Componentes](UMLs/Diagrama_de_Componentes.mermaid)
-
-## 7. 📝 Notas Finais
+## 6. 📝 Notas Finais
 
 - ✅ A autenticação de usuários é feita via arquivo users.txt, com persistência local.
 - 🔄 O orquestrador backup assume automaticamente se o principal falhar (failover automático).
