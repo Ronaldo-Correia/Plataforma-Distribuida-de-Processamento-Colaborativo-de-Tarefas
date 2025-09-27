@@ -106,7 +106,7 @@ mvn package
 ---
 
 ## 🧪 5. Testando a Plataforma Distribuída
-✅ Abrir múltiplos terminais no Windows
+Abrir múltiplos terminais no Windows
 Você pode usar:
 Windows Terminal (melhor opção: várias abas)
 CMD ou PowerShell
