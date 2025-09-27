@@ -91,7 +91,7 @@ git clone https://github.com/Ronaldo-Correia/Plataforma-Distribuida-de-Processam
 ```
 2. 📁Navegue até o diretório do projeto:
 ```bash
-cd "C:\Users\user\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas"
+cd "C:\Users\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas"
 ```
 
 3. ⚙️ Compile o projeto:
