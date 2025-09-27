@@ -22,12 +22,24 @@ public class MainOrchestrator {
     private final StateReplicator replicator;
     private final HeartbeatMonitor heartbeatMonitor;
     private final AuthManager auth = new AuthManager(); // Compartilhado
+    private final boolean isBackup;
 
-    public MainOrchestrator() {
+    public MainOrchestrator(boolean isBackup) {
+    this.isBackup = isBackup;
         this.balancer = new LoadBalancer(LoadBalancer.Policy.ROUND_ROBIN);
         this.replicator = new StateReplicator();
         this.heartbeatMonitor = new HeartbeatMonitor(this);
     }
+    private long lastHeartbeatFromPrimary = System.currentTimeMillis();
+
+public void receivePrimaryHeartbeat() {
+    lastHeartbeatFromPrimary = System.currentTimeMillis();
+}
+
+public boolean isPrimaryAlive() {
+    return System.currentTimeMillis() - lastHeartbeatFromPrimary < 5000;
+}
+
 
     public void receiveTask(Task task) {
         clock.increment();
@@ -110,6 +122,11 @@ public class MainOrchestrator {
                     String message = in.readLine();
 
                     if (message == null) continue;
+                    if (message.equals("PRIMARY_HEARTBEAT") && isBackup) {
+                            receivePrimaryHeartbeat();
+                            continue;
+                        }
+
 
                     if (message.startsWith("HEARTBEAT:")) {
                         String workerId = message.split(":")[1];

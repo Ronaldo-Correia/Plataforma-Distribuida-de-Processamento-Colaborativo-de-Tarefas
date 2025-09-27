@@ -39,33 +39,40 @@ estado, tolerância a falhas, replicação, comunicação entre processos e aute
 ```
 ├── pom.xml                          # Arquivo de configuração Maven
 ├── README.md                        # Documentação do projeto
+├── users.txt                        # Arquivo de persistência de usuários
 ├── target/                          # Diretório gerado após build (compilados)
 └── src/
     └── main/
         └── java/
             └── ifba/                # Pacote raiz da aplicação
-                ├── Main.java        # Classe principal com menu interativo
+                ├── Main.java        # Orquestrador principal com menu interativo
+                ├── BackupMain.java  # Orquestrador secundário com failover automático
+                ├── WorkerMain.java  # Ponto de entrada para os workers
+                │
+                ├── client/
+                │   └── Client.java                  # Interface de linha de comando para o cliente
+                │
                 ├── common/
-                │   ├── Task.java                 # Classe que representa uma tarefa
-                │   ├── HeartbeatMonitor.java     # Verifica falha de workers via heartbeat
-                │   └── LamportClock.java         # Relógio lógico de Lamport para ordenação
+                │   ├── Task.java                    # Classe que representa uma tarefa
+                │   ├── HeartbeatMonitor.java        # Verifica falha de workers via heartbeat
+                │   └── LamportClock.java            # Relógio lógico de Lamport para ordenação
                 │
                 ├── logs/
-                │   └── EventLogger.java          # Log centralizado de eventos com timestamp
-                │
-                ├── orchestrator/
-                │   ├── MainOrchestrator.java     # Orquestrador principal (balanceamento, distribuição)
-                │   ├── LoadBalancer.java         # Implementação da política de balanceamento
-                │   └── StateReplicator.java      # Sincronização de estado (para backup)
+                │   └── EventLogger.java             # Log centralizado de eventos com timestamp
                 │
                 ├── network/
-                │   ├── TcpServer.java            # (A ser implementado) Comunicação via TCP
-                │   ├── AuthManager.java          # (A ser implementado) Autenticação de usuários
-                │   └── MulticastSync.java        # (Opcional) Sincronização via UDP multicast
+                │   ├── AuthManager.java             # Autenticação de usuários com persistência
+                │   └── MulticastSync.java           # Sincronização de estado via multicast (opcional)
+                │
+                ├── orchestrator/
+                │   ├── MainOrchestrator.java        # Orquestrador principal (distribuição, balanceamento)
+                │   ├── BackupOrchestrator.java      # Lógica de failover e recuperação de estado
+                │   ├── LoadBalancer.java            # Implementação da política de balanceamento
+                │   └── StateReplicator.java         # Sincronização de estado entre orquestradores
                 │
                 └── worker/
-                    └── Worker.java               # (A ser implementado) Lógica dos workers (execução, heartbeat)
-
+                    ├── Worker.java                  # Lógica de execução de tarefas
+                    └── WorkerNode.java              # Comunicação e heartbeat com o orquestrador
 
 ```
 
@@ -82,62 +89,65 @@ estado, tolerância a falhas, replicação, comunicação entre processos e aute
 ```bash
 git clone https://github.com/Ronaldo-Correia/Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas.git
 ```
-2.  📁Navegue até o local que foi clonado o repositório:
+2. 📁Navegue até o diretório do projeto:
+```bash
+cd "C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas"
 ```
-cd Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas
-```
-3. ⚙️ Compile o projeto (caso necessário):
 
-- Se estiver usando Maven, rode:
-```
+3. ⚙️ Compile o projeto:
+```bash
 mvn compile
 ```
-4. 🚦 Execute os nós(3 terminais):
 
-Você precisará de 3 terminais abertos. Em cada um, execute um nó com um nodeId, uma porta e a lista de peers (outros nós).
-
-Você precisa abrir 3 terminais separados, um para cada nó.
-Cada nó deve ser iniciado com:
+4. 📦 Empacote o projeto (cria o JAR com dependências):
+```bash
+mvn package
 ```
-```
+---
 
-Ou se quiser de maneira mais rápida,no Windows execute os 3 comandos em um único terminal:
-```
-
-```
-5. 🧪 Testando:
-
+## 🧪 5. Testando a Plataforma Distribuída
 ✅ Abrir múltiplos terminais no Windows
 Você pode usar:
-
 Windows Terminal (melhor opção: várias abas)
-
 CMD ou PowerShell
+Ou abrir múltiplas janelas manualmente
 
-Ou abrir múltiplas janelas do terminal manualmente
-
-Em cada terminal, navegue até a pasta do projeto:
-
-bash
-cd "C:\Users\minat\Documents\Plataforma-Distribuida-de-Processamento-Colaborativo-de-Tarefas"
 ✅ Executar os 6 componentes
 🖥️ Terminal 1 — Orquestrador Principal
-bash
+```bash
 java -jar target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar
-Isso executa a classe ifba.Main, que você definiu como mainClass no pom.xml.
+```
 
-🖥️ Terminal 2 — Orquestrador Backup
-bash
+🖥️ Terminal 2 — Orquestrador Backup (com failover automático)
+```bash
 java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.BackupMain
+```
+
 🖥️ Terminal 3 — Worker 1
-bash
+```bash
 java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.WorkerMain worker1 6001
+```
+
 🖥️ Terminal 4 — Worker 2
-bash
+```bash
 java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.WorkerMain worker2 6002
+```
+
 🖥️ Terminal 5 — Worker 3
-bash
+```bash
 java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.WorkerMain worker3 6003
+```
+
 🖥️ Terminal 6 — Cliente
-bash
-java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.
+```bash
+java -cp "target/distributed-orchestrator-1.0-SNAPSHOT-jar-with-dependencies.jar" ifba.client.Client
+```
+---
+## 6. 📝 Notas Finais
+
+- ✅ A autenticação de usuários é feita via arquivo users.txt, com persistência local.
+- 🔄 O orquestrador backup assume automaticamente se o principal falhar (failover automático).
+- 📋 Logs de eventos são exibidos no console com timestamps para facilitar o monitoramento.
+- ⚙️ A plataforma é modular e pode ser expandida com mais workers e clientes.
+- 📁 O repositório contém README detalhado com instruções de instalação, execução e exemplos de uso.
+- 🧠 O código está organizado em pacotes funcionais, facilitando manutenção e evolução.

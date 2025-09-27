@@ -4,14 +4,26 @@ import ifba.common.Task;
 import ifba.logs.EventLogger;
 import ifba.orchestrator.MainOrchestrator;
 
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        MainOrchestrator orchestrator = new MainOrchestrator();
+        MainOrchestrator orchestrator = new MainOrchestrator(false);
         Scanner scanner = new Scanner(System.in);
 
         orchestrator.startServer(5000);
+        
+        new Thread(() -> {
+    while (true) {
+        try (Socket socket = new Socket("localhost", 6000); // porta do backup
+             PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+            out.println("PRIMARY_HEARTBEAT");
+        } catch (Exception ignored) {}
+        try { Thread.sleep(1000); } catch (InterruptedException e) {}
+    }
+}).start();
 
         // Simula heartbeats de múltiplos workers
         String[] workers = {"worker1", "worker2", "worker3"};
@@ -94,4 +106,5 @@ public class Main {
             }
         }
     }
+    
 }

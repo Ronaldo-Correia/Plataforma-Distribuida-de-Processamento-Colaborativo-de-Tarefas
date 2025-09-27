@@ -30,8 +30,11 @@ public class BackupOrchestrator {
 }
 
     public void becomePrimary() {
-        isPrimary = true;
-        new MainOrchestrator().recoverFromBackup(replicatedTasks);
-        EventLogger.log("Backup assumiu como principal");
-    }
+    isPrimary = true;
+    MainOrchestrator promoted = new MainOrchestrator(false);
+    promoted.recoverFromBackup(replicatedTasks);
+    promoted.startServer(5000); 
+    EventLogger.log("Backup assumiu como principal");
+}
+
 }
